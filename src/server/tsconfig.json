@@ -1,0 +1,36 @@
+{
+	"compilerOptions": {
+		"target": "es5",
+		"sourceMap": true,
+		"module": "commonjs",
+		"esModuleInterop": true,
+		"declaration": true,
+		"resolveJsonModule": true,
+		"removeComments": true,
+		"emitDecoratorMetadata": true,
+		"experimentalDecorators": true,
+		"rootDir": "./",
+		"importHelpers": true,
+		"outDir": "../../build/server",
+		"lib": [
+			"ES5","ES6"
+		],
+		"moduleResolution": "node",
+		"types": [
+			"node"
+		],
+		"incremental": true,
+		"composite": true
+	},
+	"include": [
+		"**/*.ts"
+	],
+	"exclude": [
+		"**/*.test.ts"
+	],
+	"references": [
+		{
+			"path": "../common"
+		}
+	]
+}

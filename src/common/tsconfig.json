@@ -1,0 +1,25 @@
+{
+	"compilerOptions": {
+		"target": "es5",
+		"moduleResolution": "node",
+		"module": "commonjs",
+		"esModuleInterop": true,
+		"declaration": true,
+		"sourceMap": true,
+		// /"noEmit": true,
+		"skipLibCheck": true,
+		"allowSyntheticDefaultImports": true,
+		"isolatedModules": true,
+		"outDir": "../../build/common",
+		"lib": [
+			"ES5", "ES6"
+		],
+		"composite": true
+	},
+	"include": [
+		"./**/*.ts"
+	],
+	"exclude": [
+		"./**/*.test.ts"
+	],
+}

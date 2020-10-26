@@ -1,0 +1,19 @@
+{
+	"version": "2.0.0",
+	"tasks": [
+		{
+			"type": "npm",
+			"script": "server",
+			"problemMatcher": [],
+			"label": "server",
+			"detail": "tsc -b ./src/server --out-dir ./build/server"
+		},
+		{
+			"type": "npm",
+			"script": "client",
+			"problemMatcher": [],
+			"label": "client",
+			"detail": "parcel serve src/client/index.html --out-dir build/client"
+		}
+	]
+}
