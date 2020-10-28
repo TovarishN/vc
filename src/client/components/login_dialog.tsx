@@ -15,7 +15,8 @@ export const LoginDialog: React.FC = () => {
 
     const LoginClick = async () => {
         let res = await Login(username, password);
-        ctx?.setusername(username);
+        if(res.result === 'success')
+            ctx?.setusername(username);
         history.goBack();
     };
 
@@ -39,11 +40,10 @@ const Login = async (username: string, password: string): Promise<LoginResult> =
             , body: JSON.stringify({ username, password })
         });
         let res = await response.json();
-        let _a = 34;
+
+        return res;
     }
     catch (error) {
-
+        return { result: 'error' };
     }
-
-    return { result: "success" };
 };

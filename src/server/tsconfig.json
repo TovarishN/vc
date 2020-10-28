@@ -2,7 +2,7 @@
 	"compilerOptions": {
 		"target": "es5",
 		"sourceMap": true,
-		"module": "commonjs",
+		"module": "CommonJS",
 		"esModuleInterop": true,
 		"declaration": true,
 		"resolveJsonModule": true,
@@ -31,6 +31,9 @@
 	"references": [
 		{
 			"path": "../common"
+		},
+		{
+			"path": "../orm"
 		}
 	]
 }
