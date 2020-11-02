@@ -4,34 +4,78 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "client": "parcel serve src/client/index.html --out-dir build/client --open",
-    "server": "tsc -b ./src/server",
-    "typeorm": "node --require ts-node/register ./node_modules/typeorm/cli.js",
-    "migration": "./node_modules/.bin/ts-node ./node_modules/.bin/typeorm migration:run"
+    "test": "jest",
+    "test:watch": "jest --watch",
+    "dev": "parcel serve ./src/client/index.html --out-dir ./build/client",
+    "serve_client": "start serve -l 1234 ./build/client",
+    "build_client": "parcel build ./src/client/index.html --out-dir ./build/client",
+    "build_server": "tsc -b ./src/server",
+    "start_server": "node ./build/server/index.js",
+    "build": "npm run build_server && npm run build_client",
+    "start": "npm run start_server",
+    "_typeorm": "node --require ts-node/register ./node_modules/typeorm/cli.js",
+    "_migration": "typeorm migration:run"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
-  "devDependencies": {
-    "@types/react": "^16.9.53",
-    "@types/react-dom": "^16.9.8",
-    "@types/react-router-dom": "^5.1.6",
-    "parcel-bundler": "^1.12.4",
-    "react": "^17.0.1",
-    "react-dom": "^17.0.1",
-    "react-router-dom": "^5.2.0",
-    "sass": "^1.27.0",
-    "typescript": "^4.1.0-dev.20201024"
+  "jest": {
+    "preset": "ts-jest",
+    "moduleFileExtensions": [
+      "ts",
+      "tsx",
+      "js"
+    ],
+    "setupFilesAfterEnv": [
+      "<rootDir>/src/client/setupTests.ts"
+    ],
+    "moduleNameMapper": {
+      ".+\\.scss$": "<rootDir>/src/client/styleMock.ts"
+    },
+    "testMatch": [
+      "**/__tests__/*.(test|spec).(ts|tsx|js)"
+    ]
   },
-  "dependencies": {
+  "devDependencies": {
+    "@babel/core": "^7.12.3",
+    "@babel/preset-env": "^7.12.1",
+    "@babel/preset-react": "^7.12.1",
+    "@testing-library/jest-dom": "^5.11.5",
+    "@testing-library/react": "^11.1.0",
+    "@types/cookie-parser": "^1.4.2",
     "@types/cors": "^2.8.8",
     "@types/express": "^4.17.8",
+    "@types/jest": "^26.0.15",
+    "@types/js-cookie": "^2.2.6",
     "@types/mysql": "^2.15.15",
+    "@types/react": "^16.9.55",
+    "@types/react-dom": "^16.9.9",
+    "@types/react-router-dom": "^5.1.6",
+    "babel-jest": "^26.6.2",
+    "jest": "^26.6.2",
+    "jest-css-modules": "^2.1.0",
+    "parcel": "^1.12.4",
+    "typescript": "^4.1.0-dev.20201102"
+  },
+  "dependencies": {
+    "cookie-parser": "^1.4.5",
     "cors": "^2.8.5",
     "express": "^4.17.1",
+    "jest-css-modules-transform": "^4.0.2",
+    "jest-extended": "^0.11.5",
+    "jest-scss-transform": "^1.0.1",
+    "js-cookie": "^2.2.1",
     "mysql": "^2.18.1",
+    "parcel-bundler": "^1.12.4",
+    "react": "^17.0.1",
+    "react-cookie": "^4.0.3",
+    "react-dom": "^17.0.1",
+    "react-router-dom": "^5.2.0",
     "reflect-metadata": "^0.1.13",
+    "sass": "^1.28.0",
+    "serve": "^11.3.2",
+    "ts-jest": "^26.4.3",
+    "ts-node": "^9.0.0",
     "tslib": "^2.0.3",
     "typeorm": "^0.2.28"
   }

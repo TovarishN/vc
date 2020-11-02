@@ -1,18 +1,22 @@
 {
 	"compilerOptions": {
 		"target": "es5",
-		"moduleResolution": "node",
-		"module": "commonjs",
+		"sourceMap": true,
+		"module": "CommonJS",
 		"esModuleInterop": true,
 		"declaration": true,
-		"sourceMap": true,
-		// /"noEmit": true,
+		"resolveJsonModule": true,
 		"skipLibCheck": true,
 		"allowSyntheticDefaultImports": true,
 		"isolatedModules": true,
+		"moduleResolution": "node",
+		"types": ["node"],
+		"incremental": true,
+		"importHelpers": true,
+		"rootDir": "./",
 		"outDir": "../../build/common",
 		"lib": [
-			"ES5", "ES6"
+			"ES5", "ES6","DOM"
 		],
 		"composite": true
 	},

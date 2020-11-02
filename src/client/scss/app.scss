@@ -1,7 +1,91 @@
+$button-color: blueviolet;
+$font: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+
 body {
     margin: 0;
-    
+    font-family: $font;
     .app {
-        background-color: red;
+        //background-color: red;
+        .button {
+            &:hover {
+                background-color: lighten($color: $button-color, $amount: 10%);
+            }
+
+            padding: 10px 20px;
+            a {
+                text-decoration: none;
+                color: white;
+            }
+            //border-radius: 2px;
+            background-color: $button-color;
+            margin: 0 5px;
+            color: white;
+            cursor: pointer;
+            font-family: inherit;
+            font-size: medium;
+        }
+        nav {
+            //border: solid 1px orangered;
+            display: flex;
+            flex-direction: row;
+            //align-items: flex-end;
+            justify-content: flex-end;
+            padding: 10px;
+        }
+
+        .dialog {
+            margin: auto;
+            width: 40vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            background-color: antiquewhite;
+            padding: 0 20px 20px 20px;
+            .dialog-title {
+                background-color: $button-color;
+                width: 100%;
+                text-align: center;
+                padding: 20px;
+                color: white;
+                //font-weight: bold;
+                text-align: left;
+                cursor: default;
+            }
+
+            .fields {
+                label {
+                    justify-self: end;
+                    white-space: nowrap;
+                }
+                input {
+                    justify-self: stretch;
+                }
+                display: grid;
+                grid-template-columns: 1fr 2fr;
+                grid-gap: 10px;
+                justify-items: end;
+                align-content: space-around;
+                padding: 10px;
+            }
+            label {
+                padding: 0 20px;
+            }
+            input {
+                padding: 5px;
+            }
+        }
+    }
+}
+
+@media only screen and (max-width: 600px) {
+    body {
+        .app {
+            .dialog {
+                width: 100%;
+                label {
+                    padding: 0;
+                }
+            }
+        }
     }
 }

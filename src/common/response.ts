@@ -1,6 +1,6 @@
-export type LoginSuccess = "success" | "error";
+export type Result = "success" | "error";
 
-export type LoginResult = {
-    result: LoginSuccess;
+export type RequestResult = {
+    result: Result;
     message?: string;
 };

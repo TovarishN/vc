@@ -1,21 +1,26 @@
 {
   "compilerOptions": {
-    "target": "es5",
+    "target": "ES5",
     "module": "commonjs",
-    "moduleResolution": "node",
+    "moduleResolution": "Node",
     "esModuleInterop": true,
     "sourceMap": true,
-    "noEmit": true,
+    //"noEmit": true,
     "skipLibCheck": true,
     "allowSyntheticDefaultImports": true,
     //"isolatedModules": true,
-    "outDir": "../../build/client",
+    "outDir": "../../build/emit/client",
+    "rootDir": "../",
     "lib": ["dom", "es5", "es6"],
     "types": [],
     "jsx": "react",
-    "composite": true
+    "composite": true,
+    "baseUrl": ".",
+    "paths": {
+      "~/*": ["./*"]
+    }
   },
   "include": ["**/*.ts", "**/*.tsx"],
-  "exclude": ["**/*.test.ts", "**/*.test.tsx"],
-  "references": [{ "path": "../common" }]
+  //"exclude": ["**/*.test.ts", "**/*.test.tsx"],
+  "references": [{ "path": "../common/" }]
 }

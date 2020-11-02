@@ -3,10 +3,14 @@
 	"tasks": [
 		{
 			"type": "npm",
-			"script": "server",
+			"script": "build_server",
 			"problemMatcher": [],
-			"label": "server",
+			"label": "build_server",
 			"detail": "tsc -b ./src/server --out-dir ./build/server"
+		},
+		{
+			"type":"npm",
+			"script": "test"
 		},
 		{
 			"type": "npm",

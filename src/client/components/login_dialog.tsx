@@ -1,49 +1,47 @@
 import React from "react";
 import { useContext, useState } from "react";
 import { useHistory } from "react-router-dom";
-import { ApiPath } from "../../common/settings";
 import { UserContext } from "./app";
-
-import { LoginResult } from "../../common/response";
+import { fetchApi } from "../../common/fetch";
 
 export const LoginDialog: React.FC = () => {
 
     const history = useHistory();
     const ctx = useContext(UserContext);
-    const [username, setUserName] = useState("");
+    const [username, setUserName] = useState(ctx.username);
     const [password, setPassword] = useState("");
 
+    const [errorMessage, setErrorMessage] = useState("");
+
     const LoginClick = async () => {
-        let res = await Login(username, password);
-        if(res.result === 'success')
-            ctx?.setusername(username);
-        history.goBack();
+        try {
+            let res = await fetchApi('/login', {username: username, password: password});
+            if (res.result === 'success')
+            {
+                ctx.setusername(username);
+                ctx.setisAuthenticated(true);
+                history.push('/');
+            }
+            else 
+                setErrorMessage(res.message);
+        }
+        catch(e) {
+            if(e instanceof Error)
+                setErrorMessage(e.message);
+        }
     };
 
     return (
-        <div className="login">
-            <label htmlFor="username">Username</label><input id="username" name="username"
-                onChange={(e) => setUserName(e.target.value)} type="text" />
-            <label htmlFor="password"> Password</label><input id="password" name="password"
-                onChange={(e) => setPassword(e.target.value)} type="password" />
-            <button onClick={LoginClick}>Login</button>
+        <div className="dialog">
+            <div className="dialog-title">Login</div>
+            <div className="fields">
+                <label htmlFor="username">Username</label><input id="username" name="username"
+                    onChange={(e) => setUserName(e.target.value)} type="text" value={username} />
+                <label htmlFor="password"> Password</label><input id="password" name="password"
+                    onChange={(e) => setPassword(e.target.value)} type="password" />
+            </div>
+            <div className="button" onClick={LoginClick}>Login</div>
+            {errorMessage}
         </div>
     );
-};
-
-
-const Login = async (username: string, password: string): Promise<LoginResult> => {
-    try {
-        let response = await fetch(`${ApiPath}/login`, {
-            headers: {"Content-Type": "application/json"},
-            method: "post"
-            , body: JSON.stringify({ username, password })
-        });
-        let res = await response.json();
-
-        return res;
-    }
-    catch (error) {
-        return { result: 'error' };
-    }
 };
