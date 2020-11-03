@@ -1,4 +1,4 @@
-$button-color: blueviolet;
+$button-background-color: blueviolet;
 $font: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
 
 body {
@@ -11,7 +11,7 @@ body {
 
         .button {
             &:hover {
-                background-color: lighten($color: $button-color, $amount: 10%);
+                background-color: lighten($color: $button-background-color, $amount: 10%);
             }
 
             padding: 10px 20px;
@@ -19,8 +19,7 @@ body {
                 text-decoration: none;
                 color: white;
             }
-            //border-radius: 2px;
-            background-color: $button-color;
+            background-color: $button-background-color;
             margin: 0 5px;
             color: white;
             cursor: pointer;
@@ -28,10 +27,8 @@ body {
             font-size: medium;
         }
         nav {
-            //border: solid 1px orangered;
             display: flex;
             flex-direction: row;
-            //align-items: flex-end;
             justify-content: flex-end;
             padding: 10px;
         }
@@ -46,12 +43,11 @@ body {
             background-color: antiquewhite;
             padding: 0 20px 20px 20px;
             .dialog-title {
-                background-color: $button-color;
+                background-color: $button-background-color;
                 width: 100%;
                 text-align: center;
                 padding: 20px;
                 color: white;
-                //font-weight: bold;
                 text-align: left;
                 cursor: default;
             }

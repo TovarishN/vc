@@ -14,7 +14,7 @@
 		},
 		{
 			"type": "npm",
-			"script": "client",
+			"script": "serve_if_not_already",
 			"problemMatcher": [],
 			"label": "client",
 			"detail": "parcel serve src/client/index.html --out-dir build/client"

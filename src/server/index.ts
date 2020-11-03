@@ -3,14 +3,16 @@ import express, { Request, Response } from 'express';
 import cors from 'cors';
 import { RequestResult } from '../common/response';
 import { LoginInfo, RegisterInfo } from '../common/request';
-import { createConnection, getConnection } from 'typeorm';
+import { getConnection } from 'typeorm';
 import { Users } from '../orm/entity/user';
 import path from 'path';
 import cookieParser from 'cookie-parser';
 import { apiHost, apiPort } from '../common/server_settings';
-
+import { timeout, waitForConnection } from './waitForConnection';
 
 let app = express();
+
+waitForConnection();
 
 app.use(cors({
     credentials: true
@@ -21,32 +23,13 @@ app.use(cors({
 app.use(express.json());
 app.use(cookieParser());
 
-let serveStaticPath = path.join(__dirname, '../client/');
-console.log(`serve client at ${serveStaticPath}`);
-app.use(express.static(serveStaticPath));
-
-(async () => {
-    let i = 0;
-    while(true) {
-        try {
-            i++;
-            await createConnection(); 
-            
-            console.log(`connection created from ${i} time`);
-            let conn = getConnection();
-            let migrations = await conn.runMigrations();
-
-            console.log(`${migrations.length} migrations are run`);
-           
-            break;
-        }
-        catch(e) {
-            if(e instanceof Error)
-                console.log(e.message);
-            await timeout(1000);
-        }
-    }
-})();
+let env = process.env['NODE_ENV'];
+console.log(process.env['NODE_ENV']);
+if (env !== 'development') {
+    let serveStaticPath = path.join(__dirname, '../client/');
+    console.log(`serve client at ${serveStaticPath}`);
+    app.use(express.static(serveStaticPath));
+}
 
 app.listen(apiPort, `${apiHost}`, () => {
     console.log(`server started at http://${apiHost}:${apiPort}`);
@@ -107,7 +90,3 @@ app.post('/register', async (request: Request<{}, {}, RegisterInfo>, response: R
             response.send({ result: "error", message: error.message });
     }
 });
-
-function timeout(ms) {
-    return new Promise(resolve => setTimeout(resolve, ms));
-}
