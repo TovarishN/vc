@@ -6,10 +6,11 @@
   "scripts": {
     "test": "jest",
     "test:watch": "jest --watch",
-    "serve_if_not_already": "cross-env NODE_ENV=development node ./scripts/parcel_serve.js",
+    "serve_if_not_already": "node ./scripts/parcel_serve.js",
     "parcel_serve": "parcel serve ./src/client/index.html --out-dir ./build/client",
     "build_client": "parcel build ./src/client/index.html --out-dir ./build/client",
     "build_server": "tsc -b ./src/server",
+    "start_db_and_server": "docker-compose -f compose.yml up -d db && node ./build/server/index.js",
     "start_server": "node ./build/server/index.js",
     "build": "npm run build_server && npm run build_client",
     "start": "npm run start_server",

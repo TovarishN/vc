@@ -9,15 +9,44 @@
 			"detail": "tsc -b ./src/server --out-dir ./build/server"
 		},
 		{
-			"type":"npm",
+			"type": "npm",
 			"script": "test"
 		},
 		{
 			"type": "npm",
-			"script": "serve_if_not_already",
+			//"script": "serve_if_not_already",
+			"script": "parcel_serve",
+			"isBackground": true,
 			"problemMatcher": [],
-			"label": "client",
+			"label": "client2",
 			"detail": "parcel serve src/client/index.html --out-dir build/client"
+		},
+		{
+			"type": "shell",
+			"command": "npm",
+			"args": [
+				"run",
+				"serve_if_not_already"
+			],
+			"label": "client",
+			"isBackground": true,
+			"problemMatcher": [
+				{
+					"pattern": [
+						{
+							"regexp": ".",
+							"file": 1,
+							"location": 2,
+							"message": 3
+						}
+					],
+					"background": {
+						"activeOnStart": true,
+						"beginsPattern": ".",
+						"endsPattern": ".",
+					}
+				}
+			]
 		}
 	]
 }

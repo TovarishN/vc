@@ -10,8 +10,7 @@ detect(port, (err, _port) => {
 
     if (port == _port) {
         console.log(`port: ${port} was not occupied`);
-        exec('docker-compose -f compose.yml db up');
-        var proc = exec('npm run dev');
+        var proc = exec('npm run parcel_serve');
         proc.stdout.on('data', (data) => console.log(data));
     } else {
         console.log(`port: ${port} was occupied, try port: ${_port}`);

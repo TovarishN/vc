@@ -8,7 +8,7 @@ import { Users } from '../orm/entity/user';
 import path from 'path';
 import cookieParser from 'cookie-parser';
 import { apiHost, apiPort } from '../common/server_settings';
-import { timeout, waitForConnection } from './waitForConnection';
+import { dbConnectionName, timeout, waitForConnection } from './waitForConnection';
 
 let app = express();
 
@@ -31,7 +31,7 @@ if (env !== 'development') {
     app.use(express.static(serveStaticPath));
 }
 
-app.listen(apiPort, `${apiHost}`, () => {
+app.listen(apiPort, () => {
     console.log(`server started at http://${apiHost}:${apiPort}`);
 });
 
@@ -45,7 +45,7 @@ app.post('/logout', async (req, response: Response<RequestResult>) => {
 app.post('/login', async (request: Request<{}, {}, LoginInfo>, response: Response<RequestResult>) => {
     try {
         let login = request.body;
-        const conn = getConnection();
+        const conn = getConnection(dbConnectionName);
 
         let result = await conn.getRepository(Users)
             .find({ where: { Username: login.username, PasswordMD5: login.password } });
@@ -70,7 +70,7 @@ app.post('/register', async (request: Request<{}, {}, RegisterInfo>, response: R
 
         let userInfo = request.body;
 
-        const conn = getConnection();
+        const conn = getConnection(dbConnectionName);
         let result = await conn.createQueryBuilder()
             .insert()
             .into(Users)
