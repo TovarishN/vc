@@ -1,4 +1,4 @@
-import { createConnection, getConnection, getManager } from "typeorm";
+import { createConnection, getConnection as typeOrmGetConnection } from "typeorm";
 
 export const dbConnectionName = process.env['NODE_ENV'] === 'development' ? 'development' : 'default';
 export async function waitForConnection() {
@@ -9,7 +9,7 @@ export async function waitForConnection() {
             await createConnection(dbConnectionName);
             
             console.log(`connection created from ${i} time`);
-            let conn = getConnection(dbConnectionName);
+            let conn = getConnection();
             let migrations = await conn.runMigrations();
 
             console.log(`${migrations.length} migrations are run`);
@@ -22,6 +22,10 @@ export async function waitForConnection() {
             await timeout(1000);
         }
     }
+}
+
+export function getConnection() {
+    return typeOrmGetConnection(dbConnectionName);
 }
 
 export function timeout(ms) {

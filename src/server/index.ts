@@ -3,12 +3,11 @@ import express, { Request, Response } from 'express';
 import cors from 'cors';
 import { RequestResult } from '../common/response';
 import { LoginInfo, RegisterInfo } from '../common/request';
-import { getConnection } from 'typeorm';
 import { Users } from '../orm/entity/user';
 import path from 'path';
 import cookieParser from 'cookie-parser';
 import { apiHost, apiPort } from '../common/server_settings';
-import { dbConnectionName, timeout, waitForConnection } from './waitForConnection';
+import { getConnection, timeout, waitForConnection } from './connection';
 
 let app = express();
 
@@ -45,7 +44,7 @@ app.post('/logout', async (req, response: Response<RequestResult>) => {
 app.post('/login', async (request: Request<{}, {}, LoginInfo>, response: Response<RequestResult>) => {
     try {
         let login = request.body;
-        const conn = getConnection(dbConnectionName);
+        const conn = getConnection();
 
         let result = await conn.getRepository(Users)
             .find({ where: { Username: login.username, PasswordMD5: login.password } });
@@ -70,7 +69,7 @@ app.post('/register', async (request: Request<{}, {}, RegisterInfo>, response: R
 
         let userInfo = request.body;
 
-        const conn = getConnection(dbConnectionName);
+        const conn = getConnection();
         let result = await conn.createQueryBuilder()
             .insert()
             .into(Users)
