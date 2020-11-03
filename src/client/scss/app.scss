@@ -4,8 +4,11 @@ $font: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
 body {
     margin: 0;
     font-family: $font;
+    
     .app {
-        //background-color: red;
+        max-width: 900px;    
+        margin: 0 auto;
+
         .button {
             &:hover {
                 background-color: lighten($color: $button-color, $amount: 10%);
@@ -34,6 +37,7 @@ body {
         }
 
         .dialog {
+            min-width: 330px;
             margin: auto;
             width: 40vh;
             display: flex;
