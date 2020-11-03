@@ -9,8 +9,13 @@ describe("<App />", () => {
 
     test("app should render a button", async () => {
         let app = render(<App />);
-        let button = await app.findByTestId("login-button-testid");
-        expect(button).toHaveClass("button");
+        let loginButton = await app.findByTestId("login-button-testid");
+        expect(loginButton).toHaveTextContent("Login");
 
+        let registerButton = await app.findByTestId("register-button-testid");
+        expect(registerButton).toHaveTextContent("Register");
+
+        let mainContent = await app.findByTestId("main-content-testid");
+        expect(mainContent).toHaveTextContent("You are not logged in");
     });
 });

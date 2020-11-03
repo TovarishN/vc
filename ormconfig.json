@@ -1,6 +1,6 @@
 [
     {
-        "name": "default",
+        "name": "production",
         "type": "mysql",
         "host": "db",
         "port": 3306,
@@ -32,6 +32,31 @@
         "username": "root",
         "password": "example",
         "database": "VisionCraft",
+        "synchronize": false,
+        "logging": false,
+        "entities": [
+            "build/orm/entity/*.{js,ts}"
+        ],
+        "subscribers": [
+            "build/orm/subscriber/*.{js,ts}"
+        ],
+        "migrations": [
+            "build/orm/migration/*.{js,ts}"
+        ],
+        "cli": {
+            "entitiesDir": "src/orm/entity",
+            "migrationsDir": "src/orm/migration",
+            "subscribersDir": "src/orm/subscriber"
+        }
+    },
+    {
+        "name": "test",
+        "type": "mysql",
+        "host": "localhost",
+        "port": 3306,
+        "username": "root",
+        "password": "example",
+        "database": "VisionCraftTest",
         "synchronize": false,
         "logging": false,
         "entities": [

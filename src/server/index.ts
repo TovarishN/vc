@@ -9,7 +9,7 @@ import cookieParser from 'cookie-parser';
 import { apiHost, apiPort } from '../common/server_settings';
 import { getConnection, timeout, waitForConnection } from './connection';
 
-let app = express();
+const app = express();
 
 waitForConnection();
 
@@ -72,7 +72,7 @@ app.post('/register', async (request: Request<{}, {}, RegisterInfo>, response: R
         const conn = getConnection();
         let result = await conn.createQueryBuilder()
             .insert()
-            .into(Users)
+            .into("Users")
             .values([{
                 Username: userInfo.username,
                 FirstName: userInfo.firstname,
@@ -82,10 +82,14 @@ app.post('/register', async (request: Request<{}, {}, RegisterInfo>, response: R
             }])
             .execute();
 
-        response.send({ result: 'error', message: 'somthing bad happened' });
+        let a = result;
+        response.send({ result: 'success' });
     }
     catch (error) {
         if (error instanceof Error)
             response.send({ result: "error", message: error.message });
     }
 });
+
+
+export default app;

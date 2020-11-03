@@ -1,6 +1,6 @@
 import { createConnection, getConnection as typeOrmGetConnection } from "typeorm";
 
-export const dbConnectionName = process.env['NODE_ENV'] === 'development' ? 'development' : 'default';
+export const dbConnectionName = process.env['NODE_ENV']!;
 export async function waitForConnection() {
     let i = 0;
     while (true) {
@@ -9,7 +9,9 @@ export async function waitForConnection() {
             await createConnection(dbConnectionName);
             
             console.log(`connection created from ${i} time`);
-            let conn = getConnection();
+            let conn = await getConnection();
+            if(dbConnectionName == 'test') 
+                await conn.synchronize(true);
             let migrations = await conn.runMigrations();
 
             console.log(`${migrations.length} migrations are run`);
@@ -28,6 +30,6 @@ export function getConnection() {
     return typeOrmGetConnection(dbConnectionName);
 }
 
-export function timeout(ms) {
+export function timeout(ms: number) {
     return new Promise(resolve => setTimeout(resolve, ms));
 }

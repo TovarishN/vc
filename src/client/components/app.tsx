@@ -51,7 +51,7 @@ const App: React.FC = () => {
 							{!isAuth ? (<div className="button" onClick={() => history.push('/login')} data-testid="login-button-testid">Login</div>) 
 									: (<div className="button" onClick={() => Logout()} data-testid="logout-button-testid">Logout</div>)}
 
-							<div className="button" onClick={() => history.push('/register')}>Register</div>
+							<div className="button" onClick={() => history.push('/register')} data-testid="register-button-testid">Register</div>
 						
 					</nav>
 
@@ -60,7 +60,7 @@ const App: React.FC = () => {
 						<Route path="/login"><LoginDialog /></Route>
 						<Route path="/register"><RegisterDialog /></Route>
 						<Route path="/">
-							<div className="main-content">
+							<div className="main-content" data-testid="main-content-testid">
 								{isAuth ? `You are logged in, ${userName}`
 										: `You are not logged in`}
 							</div>
