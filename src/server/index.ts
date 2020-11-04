@@ -1,5 +1,4 @@
 import 'reflect-metadata';
-import { Users } from '../orm/entity/user';
 import { getConnection, timeout } from './connection';
 import { validateLoginInfo, validateRegisterInfo } from '../common/validate';
 import server from './server';
@@ -16,7 +15,7 @@ server.post('/user/login', async (request, response) => {
 
         const conn = getConnection();
 
-        let result = await conn.getRepository(Users)
+        let result = await conn.getRepository("Users")
             .find({ where: { Username: loginInfo.username, PasswordMD5: loginInfo.password } });
 
         if (result.length > 0) {

@@ -12,7 +12,7 @@ export async function waitForConnection() {
             let conn = await getConnection();
             if(dbConnectionName == 'test') 
                 await conn.synchronize(true);
-            let migrations = await conn.runMigrations();
+            let migrations = await conn.runMigrations({transaction: "all"});
 
             console.log(`${migrations.length} migrations are run`);
 
