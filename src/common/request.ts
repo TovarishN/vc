@@ -1,3 +1,4 @@
+
 export type RegisterInfo = {
     username: string;
     firstname: string;
