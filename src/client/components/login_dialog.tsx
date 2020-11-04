@@ -15,7 +15,7 @@ export const LoginDialog: React.FC = () => {
 
     const LoginClick = async () => {
         try {
-            let res = await fetchApi('/login', {username: username, password: password});
+            let res = await fetchApi('/user/login', {username: username, password: password});
             if (res.result === 'success')
             {
                 ctx.setusername(username);

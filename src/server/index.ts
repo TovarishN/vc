@@ -1,47 +1,14 @@
 import 'reflect-metadata';
-import express, { Request, Response } from 'express';
-import cors from 'cors';
-import { RequestResult } from '../common/response';
-import { LoginInfo, RegisterInfo } from '../common/request';
 import { Users } from '../orm/entity/user';
-import path from 'path';
-import cookieParser from 'cookie-parser';
-import { apiHost, apiPort } from '../common/server_settings';
-import { getConnection, timeout, waitForConnection } from './connection';
+import { getConnection, timeout } from './connection';
+import server from './server';
 
-const app = express();
-
-waitForConnection();
-
-app.use(cors({
-    credentials: true
-    , origin: (or, cb) => { cb(null, true); }
-    , preflightContinue: true
-}));
-
-app.use(express.json());
-app.use(cookieParser());
-
-let env = process.env['NODE_ENV'];
-console.log(process.env['NODE_ENV']);
-if (env !== 'development') {
-    let serveStaticPath = path.join(__dirname, '../client/');
-    console.log(`serve client at ${serveStaticPath}`);
-    app.use(express.static(serveStaticPath));
-}
-
-app.listen(apiPort, () => {
-    console.log(`server started at http://${apiHost}:${apiPort}`);
-});
-
-app.post('/logout', async (req, response: Response<RequestResult>) => {
-    let cookies = req.cookies;
-
+server.post('/user/logout', async (req, response) => {
     response.clearCookie('auth');
     response.send({ result: 'success' });
 });
 
-app.post('/login', async (request: Request<{}, {}, LoginInfo>, response: Response<RequestResult>) => {
+server.post('/user/login', async (request, response) => {
     try {
         let login = request.body;
         const conn = getConnection();
@@ -62,7 +29,7 @@ app.post('/login', async (request: Request<{}, {}, LoginInfo>, response: Respons
     }
 });
 
-app.post('/register', async (request: Request<{}, {}, RegisterInfo>, response: Response<RequestResult>) => {
+server.post('/user/register', async (request, response) => {
 
     try {
         await timeout(3000);
@@ -91,5 +58,4 @@ app.post('/register', async (request: Request<{}, {}, RegisterInfo>, response: R
     }
 });
 
-
-export default app;
+export default server;

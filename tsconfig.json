@@ -1,32 +1,30 @@
 {
-    "compilerOptions": {
-        "target": "es5",
-        "sourceMap": true,
-        "module": "CommonJS",
-        "jsx": "react",
-        "esModuleInterop": true,
-        "resolveJsonModule": true,
-        "importHelpers": true,
-        "experimentalDecorators": true,
-        "emitDecoratorMetadata": true,
-        "strict": true,
-        "moduleResolution": "node",
-        "lib": [
-			"ES5","ES6"
-		],
-        "types": [
-			"node"
-		],
-		"incremental": true,
-		"composite": true
-        
+  "compilerOptions": {
+    "target": "es5",
+    "sourceMap": true,
+    "module": "CommonJS",
+    "jsx": "react",
+    "esModuleInterop": true,
+    "resolveJsonModule": true,
+    "importHelpers": true,
+    "experimentalDecorators": true,
+    "emitDecoratorMetadata": true,
+    "strict": true,
+    "moduleResolution": "node",
+    "lib": [
+      "ES5",
+      "ES6"
+    ],
+    "types": ["node","jest"],
+    "incremental": true,
+    "composite": true
+  },
+  "references": [
+    {
+      "path": "./src/common/"
     },
-    "references": [
-		{
-			"path": "../common/"
-		},
-		{
-			"path": "../orm/"
-		}
-	]
+    {
+      "path": "./src/orm/"
+    }
+  ]
 }

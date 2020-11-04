@@ -16,18 +16,16 @@
 			"ES5","ES6"
 		],
 		"moduleResolution": "node",
-		"types": [
-			"node"
-		],
+		"types": ["node", "jest"],
 		"incremental": true,
 		"composite": true
 	},
 	"include": [
 		"**/*.ts"
 	],
-	"exclude": [
-		"**/*.test.ts"
-	],
+	// "exclude": [
+	// 	"**/*.test.ts"
+	// ],
 	"references": [
 		{
 			"path": "../common/"

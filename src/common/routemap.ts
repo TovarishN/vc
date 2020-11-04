@@ -1,9 +1,9 @@
 import { LoginInfo, RegisterInfo } from './request';
 
-export type AppRoute = '/' | '/login' | '/register' | '/logout';
+export type AppRoute = '/' | '/user/login' | '/user/register' | '/user/logout';
 
 export type MapRouteToRequestBody<T extends AppRoute> 
-    = T extends '/login' ? LoginInfo
-    : T extends '/logout' ? {}
-    : T extends '/register' ? RegisterInfo
+    = T extends '/user/login' ? LoginInfo
+    : T extends '/user/logout' ? {}
+    : T extends '/user/register' ? RegisterInfo
     : never;

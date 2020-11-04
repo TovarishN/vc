@@ -19,7 +19,7 @@ export const RegisterDialog: React.FC = () => {
 	const RegisterClick = async () => {
 		try {
 			setIsLoading(true);
-			let res = await fetchApi('/register', { username, firstname, lastname, email, password });
+			let res = await fetchApi('/user/register', { username, firstname, lastname, email, password });
 			setIsLoading(false);
 			history.push('/');
 		}
