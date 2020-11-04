@@ -17,6 +17,8 @@ docker-compose -f compose.yml up
 
    http://localhost:8080
 
+it might take a while until containers are built
+
 ## Develop
 Open VisionCraft folder with Visual Studio Code
 
